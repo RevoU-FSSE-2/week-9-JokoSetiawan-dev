@@ -4,6 +4,7 @@ import transactionController from '../controllers/transaction.controller';
 
 transactionRoutes.get("/", transactionController.findAll)
 transactionRoutes.post("/", transactionController.post)
-// transactionRoutes.put("/", transactionController.putTransaction)
+transactionRoutes.put("/:id", transactionController.put)
+transactionRoutes.delete("/:id", transactionController.deleteTransaction)
 
   export default transactionRoutes
