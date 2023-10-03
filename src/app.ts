@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import { db } from "./config/db.connection";
 import routes from "./routes/main.route";
 
+
 const app = express();
 const port = process.env.PORT;
 
