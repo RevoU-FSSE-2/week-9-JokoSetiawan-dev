@@ -3,12 +3,12 @@ import { db } from "../config/db.connection";
 
 const findAll = async (req: Request, res: Response) => {
   try {
-    const result = await db.query("SELECT * FROM transaction_table");
+    const [result] = await db.promise().query("SELECT * FROM transaction_table");
 
     res.status(200).json({
       success: true,
       message: "get transaction!",
-      data: result[0],
+      data: result,
     });
   } catch (error) {
     console.log(error);
@@ -22,13 +22,13 @@ const findAll = async (req: Request, res: Response) => {
 const post = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-    const result: any = await db.query(
+    const result: any = await db.promise().query(
       `insert into mbanking_app.transaction_table (type, amount, user_id)
     values (?,?,?)`,
       [body.type, body.amount, body.user_id]
     );
     const id = result[0].insertId;
-    const getId: any = await db.query(
+    const getId: any = await db.promise().query(
       `select * from transaction_table where id =` + id
     );
     console.log(getId);
@@ -48,7 +48,7 @@ const put = async (req: Request, res: Response) => {
     const id = req.params.id;
     const body = req.body;
 
-    const result: any = await db.query(
+    const result: any = await db.promise().query(
       `UPDATE mbanking_app.transaction_table
        SET type = ?, amount = ?, user_id = ?
        WHERE id = ?`,
@@ -69,7 +69,7 @@ const put = async (req: Request, res: Response) => {
 const deleteTransaction = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const result: any = await db.query(
+    const result: any = await db.promise().query(
       `delete from mbanking_app.transaction_table where id = ?`,
       id
     );

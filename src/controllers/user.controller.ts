@@ -3,11 +3,11 @@ import { db } from "../config/db.connection";
 
 const findAll = async (req: Request, res: Response) => {
   try {
-    const result = await db.query("SELECT * FROM user_table");
+    const [result] = await db.promise().query("SELECT * FROM user_table");
 
     res.status(200).json({
       success: true,
-      data: result[0],
+      data: result,
     });
   } catch (error) {
     res.status(500).json({
@@ -20,7 +20,7 @@ const findAll = async (req: Request, res: Response) => {
 const findId = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
-    const getById = await db.query(`SELECT
+    const getById = await db.promise().query(`SELECT
         ut.id,
         ut.name,
         ut.address,
@@ -51,12 +51,12 @@ const findId = async (req: Request, res: Response) => {
 const post = async (req: Request, res: Response) => {
   try {
     const body = req.body;
-    const result: any = await db.query(
+    const result: any = await db.promise().query(
       `insert into mbanking_app.user_table (name, address)
     values (?,?)`,
       [body.name, body.address])
       const id = result[0].insertId;
-      const getId: any = await db.query(
+      const getId: any = await db.promise().query(
       `select * from user_table where id =` + id)
       console.log(getId)
       res.status(200).json({
