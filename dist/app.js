@@ -12,5 +12,5 @@ const port = process.env.PORT;
 app.use(body_parser_1.default.json());
 app.use(main_route_1.default);
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on portt ${port}`);
 });
