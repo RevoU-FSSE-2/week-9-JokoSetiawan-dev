@@ -23,13 +23,13 @@ const post = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const result: any = await db.promise().query(
-      `insert into mbanking_app.transaction_table (type, amount, user_id)
+      `insert into transaction_table (type, amount, user_id)
     values (?,?,?)`,
       [body.type, body.amount, body.user_id]
     );
     const id = result[0].insertId;
     const getId: any = await db.promise().query(
-      `select * from mbanking_app.transaction_table where id =` + id
+      `select * from transaction_table where id =` + id
     );
     console.log(getId);
     res.status(200).json({
@@ -49,7 +49,7 @@ const put = async (req: Request, res: Response) => {
     const body = req.body;
 
     const result: any = await db.promise().query(
-      `UPDATE mbanking_app.transaction_table
+      `UPDATE transaction_table
        SET type = ?, amount = ?, user_id = ?
        WHERE id = ?`,
       [body.type, body.amount, body.user_id, id]
@@ -70,7 +70,7 @@ const deleteTransaction = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const result: any = await db.promise().query(
-      `delete from mbanking_app.transaction_table where id = ?`,
+      `delete from transaction_table where id = ?`,
       id
     );
 
