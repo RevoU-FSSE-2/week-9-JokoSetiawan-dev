@@ -23,7 +23,7 @@ const post = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const result: any = await db.promise().query(
-      `insert into railway.transaction_table (type, amount, user_id)
+      `insert into transaction_table (type, amount, user_id)
     values (?,?,?)`,
       [body.type, body.amount, body.user_id]
     );
@@ -49,7 +49,7 @@ const put = async (req: Request, res: Response) => {
     const body = req.body;
 
     const result: any = await db.promise().query(
-      `UPDATE railway.transaction_table
+      `UPDATE transaction_table
        SET type = ?, amount = ?, user_id = ?
        WHERE id = ?`,
       [body.type, body.amount, body.user_id, id]
@@ -70,7 +70,7 @@ const deleteTransaction = async (req: Request, res: Response) => {
   try {
     const id = req.params.id;
     const result: any = await db.promise().query(
-      `delete from railway.transaction_table where id = ?`,
+      `delete from transaction_table where id = ?`,
       id
     );
 
