@@ -3,6 +3,7 @@ import "dotenv/config";
 import bodyParser from "body-parser";
 import { db } from "./config/db.connection";
 import routes from "./routes/main.route";
+import transactionRoutes from "./routes/transaction.route";
 
 
 const app = express();
@@ -18,6 +19,8 @@ db.connect(function (err) {
 
 app.use(bodyParser.json());
 app.use(routes)
+
+routes.use("/transaction", transactionRoutes);
 
 
 app.listen(port, () => {
