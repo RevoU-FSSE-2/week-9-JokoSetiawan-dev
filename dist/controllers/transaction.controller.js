@@ -24,7 +24,7 @@ const post = async (req, res) => {
         const result = await db_connection_1.db.promise().query(`insert into railway.transaction_table (type, amount, user_id)
     values (?,?,?)`, [body.type, body.amount, body.user_id]);
         const id = result[0].insertId;
-        const getId = await db_connection_1.db.promise().query(`select * from transaction_table where id =` + id);
+        const getId = await db_connection_1.db.promise().query(`select * from railway.transaction_table where id =` + id);
         console.log(getId);
         res.status(200).json({
             id: id,
