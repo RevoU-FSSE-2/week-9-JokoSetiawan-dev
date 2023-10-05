@@ -21,7 +21,7 @@ const findAll = async (req, res) => {
 const post = async (req, res) => {
     try {
         const body = req.body;
-        const result = await db_connection_1.db.promise().query(`insert into mbanking_app.transaction_table (type, amount, user_id)
+        const result = await db_connection_1.db.promise().query(`insert into railway.transaction_table (type, amount, user_id)
     values (?,?,?)`, [body.type, body.amount, body.user_id]);
         const id = result[0].insertId;
         const getId = await db_connection_1.db.promise().query(`select * from transaction_table where id =` + id);
@@ -41,7 +41,7 @@ const put = async (req, res) => {
     try {
         const id = req.params.id;
         const body = req.body;
-        const result = await db_connection_1.db.promise().query(`UPDATE mbanking_app.transaction_table
+        const result = await db_connection_1.db.promise().query(`UPDATE railway.transaction_table
        SET type = ?, amount = ?, user_id = ?
        WHERE id = ?`, [body.type, body.amount, body.user_id, id]);
         res.status(200).json({
@@ -58,7 +58,7 @@ const put = async (req, res) => {
 const deleteTransaction = async (req, res) => {
     try {
         const id = req.params.id;
-        const result = await db_connection_1.db.promise().query(`delete from mbanking_app.transaction_table where id = ?`, id);
+        const result = await db_connection_1.db.promise().query(`delete from railway.transaction_table where id = ?`, id);
         res.status(200).json({
             id: id,
         });

@@ -16,7 +16,7 @@ USE mbanking_app;
 CREATE TABLE transaction_table (
     id integer PRIMARY KEY AUTO_INCREMENT,
     user_id integer NOT NULL,
-    type ('income','expense') NOT NULL,
+    type ENUM ('income','expense') NOT NULL,
     amount double NOT NULL
 );
 
