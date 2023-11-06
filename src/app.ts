@@ -20,8 +20,6 @@ db.connect(function (err) {
 app.use(bodyParser.json());
 app.use(routes)
 
-routes.use("/transaction", transactionRoutes);
-
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

@@ -7,4 +7,4 @@ transactionRoutes.post("/", transactionController.post)
 transactionRoutes.put("/:id", transactionController.put)
 transactionRoutes.delete("/:id", transactionController.deleteTransaction)
 
-  export default transactionRoutes
+export default transactionRoutes
